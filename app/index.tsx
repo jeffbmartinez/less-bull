@@ -28,6 +28,24 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const dayLabels = ["S", "M", "T", "W", "T", "F", "S"];
 const today = new Date();
 const todayKey = getDateKey(today);
+const palette = {
+  background: "#0A0F0E",
+  calendarPanel: "#103A37",
+  calendarPanelBorder: "rgba(166, 214, 202, 0.22)",
+  calendarText: "#F4FFF9",
+  calendarMuted: "#C7E2DB",
+  divider: "rgba(208, 239, 231, 0.32)",
+  surface: "#22312D",
+  surfaceSelected: "#36564D",
+  surfaceBorder: "#4E6860",
+  surfaceBorderSelected: "#8EEAD9",
+  text: "#F5FAF7",
+  mutedText: "#D0DDD7",
+  accent: "#8EEAD9",
+  today: "#F2CC62",
+  monthButton: "rgba(244, 255, 249, 0.1)",
+  monthButtonBorder: "rgba(244, 255, 249, 0.22)",
+};
 
 export default function Index() {
   const [records, setRecords] = useState<RecordsByDate>({});
@@ -121,7 +139,7 @@ export default function Index() {
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
-      style={{ flex: 1, backgroundColor: "#F6F2EA" }}
+      style={{ flex: 1, backgroundColor: palette.background }}
       contentContainerStyle={{ flexGrow: 1 }}
     >
       <View
@@ -134,7 +152,15 @@ export default function Index() {
         <View
           style={{
             flex: isWide ? 1.1 : undefined,
-            backgroundColor: "#064E63",
+            backgroundColor: palette.calendarPanel,
+            borderBottomColor: isWide
+              ? "transparent"
+              : palette.calendarPanelBorder,
+            borderBottomWidth: isWide ? 0 : 1,
+            borderRightColor: isWide
+              ? palette.calendarPanelBorder
+              : "transparent",
+            borderRightWidth: isWide ? 1 : 0,
             paddingBottom: 24,
             paddingLeft: 24 + insets.left,
             paddingRight: 24 + (isWide ? 0 : insets.right),
@@ -154,7 +180,7 @@ export default function Index() {
             <Text
               selectable
               style={{
-                color: "#FFFFFF",
+                color: palette.calendarText,
                 flex: 1,
                 fontSize: 24,
                 fontWeight: "800",
@@ -175,7 +201,7 @@ export default function Index() {
                   key={`${dayLabel}-${index}`}
                   selectable
                   style={{
-                    color: "#E8F7F9",
+                    color: palette.calendarMuted,
                     flex: 1,
                     fontSize: 16,
                     fontWeight: "800",
@@ -189,7 +215,7 @@ export default function Index() {
 
             <View
               style={{
-                borderTopColor: "rgba(255, 255, 255, 0.75)",
+                borderTopColor: palette.divider,
                 borderTopWidth: 1,
                 gap: 8,
                 paddingTop: 8,
@@ -232,9 +258,9 @@ export default function Index() {
                           aspectRatio: 1.2,
                           backgroundColor: getScoreColor(points),
                           borderColor: isSelected
-                            ? "#FFFFFF"
+                            ? palette.calendarText
                             : isToday
-                              ? "#7ED957"
+                              ? palette.today
                               : "transparent",
                           borderRadius: 8,
                           borderStyle: isSelectedToday ? "dashed" : "solid",
@@ -249,7 +275,7 @@ export default function Index() {
                             accessibilityElementsHidden
                             importantForAccessibility="no-hide-descendants"
                             style={{
-                              borderColor: "#7ED957",
+                              borderColor: palette.today,
                               borderRadius: 5,
                               borderWidth: 2,
                               bottom: 4,
@@ -264,6 +290,9 @@ export default function Index() {
                           selectable
                           style={{
                             color: "#FFFFFF",
+                            textShadowColor: "rgba(0, 0, 0, 0.35)",
+                            textShadowOffset: { height: 1, width: 0 },
+                            textShadowRadius: 2,
                             fontSize: 17,
                             fontVariant: ["tabular-nums"],
                             fontWeight: "800",
@@ -293,7 +322,7 @@ export default function Index() {
           <Text
             selectable
             style={{
-              color: "#43535A",
+              color: palette.mutedText,
               fontSize: 16,
               fontVariant: ["tabular-nums"],
               fontWeight: "700",
@@ -306,7 +335,7 @@ export default function Index() {
             <Text
               selectable
               style={{
-                color: "#132025",
+                color: palette.text,
                 fontSize: 15,
                 fontWeight: "800",
                 textTransform: "uppercase",
@@ -325,8 +354,12 @@ export default function Index() {
                   onPress={() => selectRedBullChoice(habit.id as RedBullHabitId)}
                   style={({ pressed }) => ({
                     alignItems: "center",
-                    backgroundColor: isSelected ? "#E4F8FB" : "#FFFFFF",
-                    borderColor: isSelected ? "#087A8B" : "#DDD6C9",
+                    backgroundColor: isSelected
+                      ? palette.surfaceSelected
+                      : palette.surface,
+                    borderColor: isSelected
+                      ? palette.surfaceBorderSelected
+                      : palette.surfaceBorder,
                     borderRadius: 8,
                     borderWidth: 1,
                     flexDirection: "row",
@@ -341,7 +374,7 @@ export default function Index() {
                   <Text
                     selectable
                     style={{
-                      color: "#132025",
+                      color: palette.text,
                       flex: 1,
                       fontSize: 16,
                       fontWeight: "700",
@@ -352,7 +385,7 @@ export default function Index() {
                   <Text
                     selectable
                     style={{
-                      color: "#43535A",
+                      color: palette.mutedText,
                       fontSize: 15,
                       fontVariant: ["tabular-nums"],
                       fontWeight: "800",
@@ -369,7 +402,7 @@ export default function Index() {
             <Text
               selectable
               style={{
-                color: "#132025",
+                color: palette.text,
                 fontSize: 15,
                 fontWeight: "800",
                 textTransform: "uppercase",
@@ -390,8 +423,8 @@ export default function Index() {
                   onPress={() => toggleBinaryHabit(habit.id as BinaryHabitId)}
                   style={({ pressed }) => ({
                     alignItems: "center",
-                    backgroundColor: "#FFFFFF",
-                    borderColor: "#DDD6C9",
+                    backgroundColor: palette.surface,
+                    borderColor: palette.surfaceBorder,
                     borderRadius: 8,
                     borderWidth: 1,
                     flexDirection: "row",
@@ -404,14 +437,14 @@ export default function Index() {
                 >
                   <View pointerEvents="none">
                     <Checkbox
-                      color={isChecked ? "#087A8B" : undefined}
+                      color={isChecked ? palette.accent : undefined}
                       value={isChecked}
                     />
                   </View>
                   <Text
                     selectable
                     style={{
-                      color: "#132025",
+                      color: palette.text,
                       flex: 1,
                       fontSize: 16,
                       fontWeight: "700",
@@ -422,7 +455,7 @@ export default function Index() {
                   <Text
                     selectable
                     style={{
-                      color: "#43535A",
+                      color: palette.mutedText,
                       fontSize: 15,
                       fontVariant: ["tabular-nums"],
                       fontWeight: "800",
@@ -453,8 +486,8 @@ function MonthButton({
       onPress={onPress}
       style={({ pressed }) => ({
         alignItems: "center",
-        backgroundColor: "rgba(255, 255, 255, 0.12)",
-        borderColor: "rgba(255, 255, 255, 0.22)",
+        backgroundColor: palette.monthButton,
+        borderColor: palette.monthButtonBorder,
         borderRadius: 8,
         borderWidth: 1,
         height: 44,
@@ -465,7 +498,7 @@ function MonthButton({
     >
       <Text
         selectable
-        style={{ color: "#FFFFFF", fontSize: 28, fontWeight: "800" }}
+        style={{ color: palette.calendarText, fontSize: 28, fontWeight: "800" }}
       >
         {label}
       </Text>
