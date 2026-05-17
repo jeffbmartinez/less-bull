@@ -214,6 +214,7 @@ export default function Index() {
                     const points = calculatePoints(records[dateKey]);
                     const isSelected = dateKey === selectedDateKey;
                     const isToday = dateKey === todayKey;
+                    const isSelectedToday = isSelected && isToday;
 
                     return (
                       <Pressable
@@ -228,15 +229,32 @@ export default function Index() {
                           borderColor: isSelected
                             ? "#FFFFFF"
                             : isToday
-                              ? "rgba(255, 255, 255, 0.85)"
+                              ? "#7ED957"
                               : "transparent",
                           borderRadius: 8,
+                          borderStyle: isSelectedToday ? "dashed" : "solid",
                           borderWidth: isSelected || isToday ? 2 : 0,
                           flex: 1,
                           justifyContent: "center",
                           opacity: pressed ? 0.78 : 1,
                         })}
                       >
+                        {isSelectedToday ? (
+                          <View
+                            accessibilityElementsHidden
+                            importantForAccessibility="no-hide-descendants"
+                            style={{
+                              borderColor: "#7ED957",
+                              borderRadius: 5,
+                              borderWidth: 2,
+                              bottom: 4,
+                              left: 4,
+                              position: "absolute",
+                              right: 4,
+                              top: 4,
+                            }}
+                          />
+                        ) : null}
                         <Text
                           selectable
                           style={{
