@@ -13,6 +13,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.jeff.lessbull",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#090E1A",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -52,6 +54,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "be8979d5-5825-468e-a878-6bfc19369efd"
+      }
+    },
+    "owner": "jeffbmartinez"
   }
 }

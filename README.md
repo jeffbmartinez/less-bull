@@ -48,3 +48,21 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Install on Android without an Expo server
+
+This project has an EAS `preview` build profile that creates an Android APK for internal distribution. The APK includes the app bundle, so it does not need `npx expo start` or an Expo development server running.
+
+1. Log in to Expo:
+
+   ```bash
+   npx eas-cli@latest login
+   ```
+
+2. Create the Android APK:
+
+   ```bash
+   npx eas-cli@latest build -p android --profile preview
+   ```
+
+3. When EAS finishes, open the build URL on your Android phone and install the APK. Android may ask you to allow installs from that browser before continuing.
