@@ -23,6 +23,7 @@ import {
   loadRecords,
   saveRecords,
 } from "@/lib/day-records";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const dayLabels = ["S", "M", "T", "W", "T", "F", "S"];
 const today = new Date();
@@ -43,6 +44,7 @@ export default function Index() {
   );
   const { width } = useWindowDimensions();
   const isWide = width >= 760;
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     let isMounted = true;
@@ -133,7 +135,10 @@ export default function Index() {
           style={{
             flex: isWide ? 1.1 : undefined,
             backgroundColor: "#064E63",
-            padding: 24,
+            paddingBottom: 24,
+            paddingLeft: 24 + insets.left,
+            paddingRight: 24 + (isWide ? 0 : insets.right),
+            paddingTop: 24 + insets.top,
             gap: 20,
           }}
         >
@@ -255,36 +260,26 @@ export default function Index() {
         <View
           style={{
             flex: 1,
-            gap: 24,
-            padding: 24,
+            gap: 14,
+            paddingBottom: 16 + insets.bottom,
+            paddingLeft: 20 + (isWide ? 0 : insets.left),
+            paddingRight: 20 + insets.right,
+            paddingTop: 16 + (isWide ? insets.top : 0),
           }}
         >
-          <View style={{ gap: 6 }}>
-            <Text
-              selectable
-              style={{
-                color: "#132025",
-                fontSize: 24,
-                fontWeight: "800",
-                letterSpacing: 0,
-              }}
-            >
-              {formatLongDate(selectedDate)}
-            </Text>
-            <Text
-              selectable
-              style={{
-                color: "#43535A",
-                fontSize: 16,
-                fontVariant: ["tabular-nums"],
-                fontWeight: "700",
-              }}
-            >
-              {selectedPoints} points
-            </Text>
-          </View>
+          <Text
+            selectable
+            style={{
+              color: "#43535A",
+              fontSize: 16,
+              fontVariant: ["tabular-nums"],
+              fontWeight: "700",
+            }}
+          >
+            {selectedPoints} points
+          </Text>
 
-          <View style={{ gap: 12 }}>
+          <View style={{ gap: 8 }}>
             <Text
               selectable
               style={{
@@ -314,10 +309,10 @@ export default function Index() {
                     flexDirection: "row",
                     gap: 12,
                     justifyContent: "space-between",
-                    minHeight: 50,
+                    minHeight: 44,
                     opacity: pressed ? 0.72 : 1,
                     paddingHorizontal: 14,
-                    paddingVertical: 12,
+                    paddingVertical: 8,
                   })}
                 >
                   <Text
@@ -347,7 +342,7 @@ export default function Index() {
             })}
           </View>
 
-          <View style={{ gap: 12 }}>
+          <View style={{ gap: 8 }}>
             <Text
               selectable
               style={{
@@ -365,9 +360,12 @@ export default function Index() {
               );
 
               return (
-                <View
+                <Pressable
                   key={habit.id}
-                  style={{
+                  accessibilityRole="checkbox"
+                  accessibilityState={{ checked: isChecked }}
+                  onPress={() => toggleBinaryHabit(habit.id as BinaryHabitId)}
+                  style={({ pressed }) => ({
                     alignItems: "center",
                     backgroundColor: "#FFFFFF",
                     borderColor: "#DDD6C9",
@@ -375,18 +373,18 @@ export default function Index() {
                     borderWidth: 1,
                     flexDirection: "row",
                     gap: 12,
-                    minHeight: 54,
+                    minHeight: 44,
+                    opacity: pressed ? 0.72 : 1,
                     paddingHorizontal: 14,
-                    paddingVertical: 12,
-                  }}
+                    paddingVertical: 8,
+                  })}
                 >
-                  <Checkbox
-                    color={isChecked ? "#087A8B" : undefined}
-                    onValueChange={() =>
-                      toggleBinaryHabit(habit.id as BinaryHabitId)
-                    }
-                    value={isChecked}
-                  />
+                  <View pointerEvents="none">
+                    <Checkbox
+                      color={isChecked ? "#087A8B" : undefined}
+                      value={isChecked}
+                    />
+                  </View>
                   <Text
                     selectable
                     style={{
@@ -409,7 +407,7 @@ export default function Index() {
                   >
                     {habit.points} pt
                   </Text>
-                </View>
+                </Pressable>
               );
             })}
           </View>
