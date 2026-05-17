@@ -60,6 +60,10 @@ export function calculatePoints(record: DayRecord | undefined) {
 }
 
 export function getScoreColor(points: number) {
+  if (points === 0) {
+    return "#68747C";
+  }
+
   if (points >= 5) {
     return "#18D7E8";
   }
