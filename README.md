@@ -1,55 +1,65 @@
-# Welcome to your Expo app 👋
+# less-bull
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This app was vibe coded.
+
+less-bull is a personal Expo app for tracking daily habits and Red Bull intake. It gives each day a simple point score, then shows those scores on a calendar so progress is easy to scan.
+
+## What it tracks
+
+- Red Bull intake: `1 Redbull or less` or `2 redbulls`
+- Healthy meals
+- Worked out or took a long walk
+- No significant candy or heavy snacking
+- Bonus exercise
+
+Each completed item contributes points to the selected day. Daily records are stored locally on the device with AsyncStorage.
+
+## Tech stack
+
+- Expo SDK 54
+- Expo Router
+- React Native
+- TypeScript
+- AsyncStorage for local persistence
+
+The app can run on iOS, Android, and web.
 
 ## Get started
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Install dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Start the Expo development server:
 
-## Learn more
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+From the Expo CLI output, choose where to open the app:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Android emulator or device
+- iOS simulator or device
+- Expo Go
+- Web browser
 
-## Join the community
+You can also start a specific target directly:
 
-Join our community of developers creating universal apps.
+```bash
+npm run android
+npm run ios
+npm run web
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Run linting:
 
-## Install on Android without an Expo server
+```bash
+npm run lint
+```
+
+## Android APK preview build
 
 This project has an EAS `preview` build profile that creates an Android APK for internal distribution. The APK includes the app bundle, so it does not need `npx expo start` or an Expo development server running.
 
