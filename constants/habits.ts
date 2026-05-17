@@ -65,11 +65,11 @@ export function getScoreColor(points: number) {
   }
 
   if (points >= 5) {
-    return "#0D747C";
+    return "#1847A6";
   }
 
   if (points === 4) {
-    return "#247A3F";
+    return "#51677B";
   }
 
   if (points === 3) {
