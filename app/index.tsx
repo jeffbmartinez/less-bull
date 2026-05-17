@@ -205,7 +205,12 @@ export default function Index() {
                       return (
                         <View
                           key={`empty-${weekIndex}-${dayIndex}`}
-                          style={{ flex: 1, aspectRatio: 1.2 }}
+                          style={{
+                            aspectRatio: 1.2,
+                            borderColor: "transparent",
+                            borderWidth: 2,
+                            flex: 1,
+                          }}
                         />
                       );
                     }
@@ -233,7 +238,7 @@ export default function Index() {
                               : "transparent",
                           borderRadius: 8,
                           borderStyle: isSelectedToday ? "dashed" : "solid",
-                          borderWidth: isSelected || isToday ? 2 : 0,
+                          borderWidth: 2,
                           flex: 1,
                           justifyContent: "center",
                           opacity: pressed ? 0.78 : 1,
